@@ -1,0 +1,24 @@
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+    /* justify-content: space-evenly; */
+}
+
+.row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.img-container {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+    border: 2px solid black;
+}
