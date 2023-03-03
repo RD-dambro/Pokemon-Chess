@@ -1,0 +1,27 @@
+[	
+    {
+        "name": "Nidoking",
+        "type": "Poison",
+        "number": "034"
+    },
+    {
+        "name": "Arcanine",
+        "type": "Fire",
+        "number": "059"
+    },
+    {
+        "name": "Gyarados",
+        "type": "Water",
+        "number": "130"
+    },
+    {
+        "name": "Dragonite",
+        "type": "Dragon",
+        "number": "149"
+    },
+    {
+        "name": "Mewtwo",
+        "type": "Psychic",
+        "number": "150"
+    }
+]

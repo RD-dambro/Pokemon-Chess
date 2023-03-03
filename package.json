@@ -1,0 +1,22 @@
+{
+  "name": "pokemonchess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "http-server ./public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RD-dambro/Pokemon-Chess.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RD-dambro/Pokemon-Chess/issues"
+  },
+  "homepage": "https://github.com/RD-dambro/Pokemon-Chess#readme",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

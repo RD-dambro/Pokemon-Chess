@@ -1,0 +1,182 @@
+[
+    {
+        "name": "Venusaur",
+        "type":  "Grass",
+        "number": "003"    
+    },
+    {
+        "name": "Charizard",
+        "type": "Fire",
+        "number": "006"    
+    },
+    {
+        "name": "Blastoise",
+        "type": "Water",
+        "number": "009"
+    },
+    {
+        "name": "Butterfree",
+        "type": "Bug",
+        "number": "012"
+    },
+    {
+        "name": "Beedrill",
+        "type": "Bug",
+        "number": "015"
+    },
+    {
+        "name": "Pidgeot",
+        "type": "Flying",
+        "number": "018"
+    },
+    {
+        "name": "Raticate",
+        "type": "Normal",
+        "number": "020"
+    },
+    {
+        "name": "Fearow",
+        "type": "Flying",
+        "number": "022"
+    },
+    {
+        "name": "Arbok",
+        "type": "Poison",
+        "number": "024"
+    },
+    {
+        "name": "Raichu",
+        "type": "Electric",
+        "number": "026"
+    },
+    {
+        "name": "Clefable",
+        "type": "Fairy",
+        "number": "036"
+    },
+    {
+        "name": "Wigglytuff",
+        "type": "Fairy",
+        "number": "040"
+    },
+    {
+        "name": "Golbat",
+        "type": "Poison",
+        "number": "042"
+    },
+    {
+        "name": "Vileplume",
+        "type": "Grass",
+        "number": "045"
+    },
+    {
+        "name": "Parasect",
+        "type": "Bug",
+        "number": "047"
+    },
+    {
+        "name": "Dugtrio",
+        "type": "Ground",
+        "number": "051"
+    },
+    {
+        "name": "Persian",
+        "type": "Normal",
+        "number": "053"
+    },
+    {
+        "name": "Golduck",
+        "type": "Water",
+        "number": "055"
+    },
+    {
+        "name": "Primeape",
+        "type": "Fighting",
+        "number": "057"
+    },
+    {
+        "name": "Poliwrath",
+        "type": "Water",
+        "number": "062"
+    },
+    {
+        "name": "Machamp",
+        "type": "Fighting",
+        "number": "068"
+    },
+    {
+        "name": "Victreebel",
+        "type": "Grass",
+        "number": "071"
+    },
+    {
+        "name": "Tentacruel",
+        "type": "Water",
+        "number": "073"
+    },
+    {
+        "name": "Golem",
+        "type": "Rock",
+        "number": "076"
+    },
+    {
+        "name": "Slowbro",
+        "type": "Water",
+        "number": "080"
+    },
+    {
+        "name": "Dodrio",
+        "type": "Flying",
+        "number": "085"
+    },
+    {
+        "name": "Muk",
+        "type": "Poison",
+        "number": "089"
+    },
+    {
+        "name": "Cloyster",
+        "type": "Water",
+        "number": "091"
+    },
+    {
+        "name": "Hypno",
+        "type": "Psychic",
+        "number": "097"
+    },
+    {
+        "name": "Kingler",
+        "type": "Water",
+        "number": "099"
+    },
+    {
+        "name": "Electrode",
+        "type": "Electric",
+        "number": "101"
+    },
+    {
+        "name": "Exeggutor",
+        "type": "Grass",
+        "number": "103"
+    },
+    {
+        "name": "Marowak",
+        "type": "Ground",
+        "number": "105"
+    },
+    {
+        "name": "Weezing",
+        "type": "Poison",
+        "number": "110"
+    },
+    {
+        "name": "Seaking",
+        "type": "Water",
+        "number": "119"
+    },
+    {
+        "name": "Starmie",
+        "type": "Water",
+        "number": "121"
+    }
+]

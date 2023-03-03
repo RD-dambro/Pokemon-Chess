@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Magneton",
+        "type": "Electric",
+        "number": "082"
+    },
+    {
+        "name": "Hitmonlee",
+        "type": "Fighting",
+        "number": "106"
+    },
+    {
+        "name": "Hitmonchan",
+        "type": "Fighting",
+        "number": "107"
+    },
+    {
+        "name": "Scyther",
+        "type": "Bug",
+        "number": "123"
+    },
+    {
+        "name": "Electabuzz",
+        "type": "Electric",
+        "number": "125"
+    },
+    {
+        "name": "Magmar",
+        "type": "Fire",
+        "number": "126"
+    },
+    {
+        "name": "Pinsir",
+        "type": "Bug",
+        "number": "127"
+    },
+    {
+        "name": "Porygon",
+        "type": "Normal",
+        "number": "137"
+    },
+    {
+        "name": "Omastar",
+        "type": "Rock",
+        "number": "139"
+    },
+    {
+        "name": "Kabutops",
+        "type": "Rock",
+        "number": "141"
+    }
+]

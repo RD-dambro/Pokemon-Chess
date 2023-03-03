@@ -496,12 +496,12 @@
     },
     {
         "name": "Voltorb",
-        "type": "Elelctric",
+        "type": "Electric",
         "number": "100"
     },
     {
         "name": "Electrode",
-        "type": "Elelctric",
+        "type": "Electric",
         "number": "101"
     },
     {
@@ -571,7 +571,7 @@
     },
     {
         "name": "Kangaskhan",
-        "type": "Noraml",
+        "type": "Normal",
         "number": "115"
     },
     {
@@ -656,12 +656,12 @@
     },
     {
         "name": "Ditto",
-        "type": "Noraml",
+        "type": "Normal",
         "number": "132"
     },
     {
         "name": "Eevee",
-        "type": "Noraml",
+        "type": "Normal",
         "number": "133"
     },
     {
@@ -671,7 +671,7 @@
     },
     {
         "name": "Jolteon",
-        "type": "Elelctric",
+        "type": "Electric",
         "number": "135"
     },
     {

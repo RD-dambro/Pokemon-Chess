@@ -1,0 +1,219 @@
+[
+    {
+        "name": "Bulbasaur",
+        "type": "Grass",
+        "number": "001",
+		"promotion": "003"
+    },
+    {
+        "name": "Charmander",
+        "type": "Fire",
+        "number": "004",
+		"promotion": "006"
+    },
+    {
+        "name": "Squirtle",
+        "type": "Water",
+        "number": "007",
+		"promotion": "009"
+    },
+    {
+        "name": "Caterpie",
+        "type": "Bug",
+        "number": "010",
+		"promotion": "012"
+    },
+    {
+        "name": "Weedle",
+        "type": "Bug",
+        "number": "013",
+		"promotion": "015"
+    },
+    {
+        "name": "Pidgey",
+        "type": "Flying",
+        "number": "016",
+		"promotion": "018"
+    },
+    {
+        "name": "Rattata",
+        "type": "Normal",
+        "number": "019",
+		"promotion": "020"
+    },
+    {
+        "name": "Spearow",
+        "type": "Flying",
+        "number": "021",
+		"promotion": "022"
+    },
+    {
+        "name": "Ekans",
+        "type": "Poison",
+        "number": "023",
+		"promotion": "024"
+    },
+    {
+        "name": "Pikachu",
+        "type": "Electric",
+        "number": "025",
+		"promotion": "026"
+    },
+    {
+        "name": "Clefairy",
+        "type": "Fairy",
+        "number": "035",
+		"promotion": "036"
+    },
+    {
+        "name": "Jigglypuff",
+        "type": "Fairy",
+        "number": "039",
+		"promotion": "040"
+		
+    },
+    {
+        "name": "Zubat",
+        "type": "Poison",
+        "number": "041",
+		"promotion": "042"
+    },
+	{
+        "name": "Oddish",
+        "type": "Grass",
+        "number": "043",
+		"promotion": "045"
+    },
+    {
+        "name": "Paras",
+        "type": "Bug",
+        "number": "046",
+		"promotion": "047"
+    },
+    {
+        "name": "Diglett",
+        "type": "Ground",
+        "number": "050",
+		"promotion": "051"
+    },
+    {
+        "name": "Meowth",
+        "type": "Normal",
+        "number": "052",
+		"promotion": "053"
+    },
+    {
+        "name": "Psyduck",
+        "type": "Water",
+        "number": "054",
+		"promotion": "055"
+    },
+    {
+        "name": "Mankey",
+        "type": "Fighting",
+        "number": "056",
+		"promotion": "057"
+    },
+    {
+        "name": "Poliwag",
+        "type": "Water",
+        "number": "060",
+		"promotion": "062"
+    },
+    {
+        "name": "Machop",
+        "type": "Fighting",
+        "number": "066",
+		"promotion": "068"
+    },
+    {
+        "name": "Bellsprout",
+        "type": "Grass",
+        "number": "069",
+		"promotion": "071"
+    },
+    {
+        "name": "Tentacool",
+        "type": "Water",
+        "number": "072",
+		"promotion": "073"
+    },
+    {
+        "name": "Geodude",
+        "type": "Rock",
+        "number": "074",
+		"promotion": "076"
+    },
+    {
+        "name": "Slowpoke",
+        "type": "Water",
+        "number": "079",
+		"promotion": "080"
+    },
+    {
+        "name": "Doduo",
+        "type": "Flying",
+        "number": "084",
+		"promotion": "085"
+    },
+    {
+        "name": "Grimer",
+        "type": "Poison",
+        "number": "088",
+		"promotion": "089"
+    },
+    {
+        "name": "Shellder",
+        "type": "Water",
+        "number": "090",
+		"promotion": "091"
+    },
+    {
+        "name": "Drowzee",
+        "type": "Psychic",
+        "number": "096",
+		"promotion": "097"
+    },
+    {
+        "name": "Krabby",
+        "type": "Water",
+        "number": "098",
+		"promotion": "099"
+    },
+    {
+        "name": "Voltorb",
+        "type": "Electric",
+        "number": "100",
+		"promotion": "101"
+    },
+    {
+        "name": "Exeggcute",
+        "type": "Grass",
+        "number": "102",
+		"promotion": "103"
+    },
+    {
+        "name": "Cubone",
+        "type": "Ground",
+        "number": "104",
+		"promotion": "105"
+    },
+    {
+        "name": "Koffing",
+        "type": "Poison",
+        "number": "109",
+		"promotion": "110"
+    },
+    {
+        "name": "Goldeen",
+        "type": "Water",
+        "number": "118",
+		"promotion": "119"
+    },
+    {
+        "name": "Staryu",
+        "type": "Water",
+        "number": "120",
+		"promotion": "121"
+    }
+]

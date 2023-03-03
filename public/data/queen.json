@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Nidoqueen",
+        "type": "Poison",
+        "number": "031"
+    },
+    {
+        "name": "Articuno",
+        "type": "Ice",
+        "number": "144"
+    },
+    {
+        "name": "Zapdos",
+        "type": "Electric",
+        "number": "145"
+    },
+    {
+        "name": "Moltres",
+        "type": "Fire",
+        "number": "146"
+    },
+    {
+        "name": "Mew",
+        "type": "Psychic",
+        "number": "151"
+    }
+]

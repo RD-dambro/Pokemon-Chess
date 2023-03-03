@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Alakazam",
+        "type": "Psychic",
+        "number": "065"
+    },
+    {
+        "name": "Onix",
+        "type": "Rock",
+        "number": "095"
+    },
+    {
+        "name": "Chansey",
+        "type": "Normal",
+        "number": "113"
+    },
+    {
+        "name": "Kangaskhan",
+        "type": "Normal",
+        "number": "115"
+    },
+    {
+        "name": "Lapras",
+        "type": "Water",
+        "number": "131"
+    },
+    {
+        "name": "Aerodactyl",
+        "type": "Rock",
+        "number": "142"
+    },
+    {
+        "name": "Snorlax",
+        "type": "Normal",
+        "number": "143"
+    },
+	{
+        "name": "Gengar",
+        "type": "Ghost",
+        "number": "094"
+    }
+]

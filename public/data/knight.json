@@ -1,0 +1,52 @@
+[
+    {
+        "name": "Ninetales",
+        "type": "Fire",
+        "number": "038"
+    },
+    {
+        "name": "Rapidash",
+        "type": "Fire",
+        "number": "078"
+    },
+    {
+        "name": "Rhydon",
+        "type": "Ground",
+        "number": "112"
+    },
+    {
+        "name": "Seadra",
+        "type": "Water",
+        "number": "117"
+    },
+    {
+        "name": "Tauros",
+        "type": "Normal",
+        "number": "128"
+    },
+	{
+        "name": "Eevee",
+        "type": "Normal",
+        "number": "133"
+    },
+    {
+        "name": "Vaporeon",
+        "type": "Water",
+        "number": "134"
+    },
+    {
+        "name": "Jolteon",
+        "type": "Electric",
+        "number": "135"
+    },
+    {
+        "name": "Flareon",
+        "type": "Fire",
+        "number": "136"
+    },
+    {
+        "name": "Porygon",
+        "type": "Normal",
+        "number": "137"
+    }
+]

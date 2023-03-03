@@ -1,0 +1,48 @@
+
+#chessboard{
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat( 8, 50px );
+    border: 2px solid black;
+    aspect-ratio: 1/1;
+}
+
+.rotate {
+    -webkit-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+}
+
+.cell {
+    aspect-ratio: 1/ 1;
+}
+
+.black {
+    background-color: black;
+    color: white;
+}
+
+.white {
+    background-color: white;
+    color: black;
+}
+
+.grey{
+    background-color: gray;
+}
+
+.hover {
+    border: 2px solid tomato;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* hrome, Edge, Opera and Firefox */
+}
+
+span{
+    pointer-events: none;
+}
