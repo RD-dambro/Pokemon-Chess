@@ -26,8 +26,10 @@ class Piece{
 
     getValidMoves(){}
 
-    isOpponent(board, pos){
-        return board[pos].owner !== this.owner;
+    isNotFriendly(board, pos){
+        if(board[pos] === null) return true;
+
+        return board[pos].owner != this.owner;
     }
 
     isInBoard(board, pos){
@@ -48,7 +50,7 @@ class Piece{
                 moves.push(pos);
             }
             else{
-                if(this.isOpponent(board, pos)){
+                if(this.isNotFriendly(board, pos)){
                     moves.push(pos);
                 }
                 break;
@@ -92,12 +94,52 @@ class Rook extends Piece{
 
 class Knight extends Piece{
     getValidMoves(board){
-        // controlla dove può muoversi
+        let row = parseInt(this.current_position / 8);
+        let col = this.current_position % 8;
         let moves = [];
-        let pos = this.current_position;
-    
         
-        return moves;
+        // up moves
+        if(row <= 5){
+            if(col >= 1){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.UP] + MOVES[DIRECTIONS.LEFT])
+            }
+            if( col <= 6){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.UP] + MOVES[DIRECTIONS.RIGHT])
+            }
+        }
+
+        // down moves
+        if(row >= 2){
+            if(col >= 1){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.DOWN] + MOVES[DIRECTIONS.LEFT])
+            }
+            if( col <= 6){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.DOWN] + MOVES[DIRECTIONS.RIGHT])
+            }
+        }
+
+        // left moves
+        if(col >= 2){
+            if(row >= 1){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.LEFT] + MOVES[DIRECTIONS.DOWN])
+            }
+            if( row <= 6){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.LEFT] + MOVES[DIRECTIONS.UP])
+            }
+        }
+
+        // right moves
+        if(col <= 5){
+            if(row >= 1){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.RIGHT] + MOVES[DIRECTIONS.DOWN])
+            }
+            if( row <= 6){
+                moves.push(this.current_position + 2*MOVES[DIRECTIONS.RIGHT] + MOVES[DIRECTIONS.UP])
+            }
+        }
+
+        return moves.filter(p => this.isInBoard(board, p))
+            .filter(p => this.isNotFriendly(board, p));
     }
 }
 
