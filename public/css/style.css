@@ -34,6 +34,15 @@
     border: 2px solid tomato;
 }
 
+.valid {
+    border: 2px solid gold;
+}
+
+.valid.hover {
+    border: 2px solid limegreen;
+}
+
+
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

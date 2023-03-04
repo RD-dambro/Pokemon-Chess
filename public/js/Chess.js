@@ -150,6 +150,8 @@ class Chess{
         this.view.src = id;
         this.view.chessboard.children.item(this.view.src).classList.add("grey");
         // segnala mosse valide
+        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
+            .map( i => this.view.chessboard.children.item(i).classList.add("valid"))
     }
 
     onPointerEnter(e){
@@ -167,10 +169,19 @@ class Chess{
 
     onPointerUp(e){
         let dst = parseInt(e.target.id);
+
+        if(this.view.src === null) return
+
+        // rimuovi mosse valide
+        this.model.chessboard[this.view.src].getValidMoves(this.model.chessboard)
+            .map( i => this.view.chessboard.children.item(i).classList.remove("valid"))
+
         this.move(this.view.src, dst);
         this.view.chessboard.children.item(this.view.src).classList.remove("grey");
         this.view.chessboard.children.item(dst).classList.remove("hover");
         this.view.src = null;
+
+        
     }
 
     move(src, dst){
