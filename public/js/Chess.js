@@ -1,7 +1,7 @@
 const PIECE_ROW = Object.freeze([Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook]);
 const ROW_INDEXES = Object.freeze(["1", "2", "3", "4", "5", "6", "7", "8"]);
 const COL_INDEXES = Object.freeze(["A", "B", "C", "D", "E", "F", "G", "H"]);
-
+const TEAM = Object.freeze({ WHITE: 1, BLACK: -1})
 class ChessModel{
     chessboard;
 
@@ -13,11 +13,34 @@ class ChessModel{
             let wid = i;
             let bid = this.chessboard.length - i - 1;
             
-            this.chessboard[wid] = new MyPiece(1, wid);
-            this.chessboard[wid + 8] = new Pawn(1, wid + 8);
-            this.chessboard[bid] = new MyPiece(-1, bid);
-            this.chessboard[bid - 8] = new Pawn(-1, bid - 8);
+            this.chessboard[wid] = new MyPiece(TEAM.WHITE, wid);
+            this.chessboard[wid + 8] = new Pawn(TEAM.WHITE, wid + 8);
+            this.chessboard[bid] = new MyPiece(TEAM.BLACK, bid);
+            this.chessboard[bid - 8] = new Pawn(TEAM.BLACK, bid - 8);
         }
+    }
+
+    insufficientMaterial(){
+        return false;
+    }
+
+    isCheck(turn){
+        return Piece.isCheck(this.chessboard, turn, -turn);
+    }
+
+    isStall(turn){
+        for(let p of this.chessboard){
+            if(p === null) continue;
+            if(p.owner === turn) continue;
+            
+            if(p.getValidMoves(this.chessboard).length > 0)
+                return false;
+        }
+        return true;
+    }
+
+    isCheckMate(turn){
+        return this.isCheck(turn) && this.isStall(turn);
     }
 
     static getCol(pos){
@@ -43,10 +66,28 @@ class ChessModel{
         if(!piece.getValidMoves(this.chessboard).includes(dst)) return [false, null];
 
         let captured_piece = this.chessboard[dst]
-        
+        let castle = null;
+
+        if(piece.castle_moves){
+            for(let move of piece.castle_moves){
+                if(move.move === dst){
+                    castle = move;
+                }
+            }
+        }
+
+        let en_passant = null;
+        if(piece.en_passant){
+            let en_passant_move = piece.en_passant.current_position + piece.owner*MOVES[DIRECTIONS.UP]
+            if(en_passant_move === dst){
+                en_passant = piece.en_passant;
+                captured_piece = en_passant;
+            }
+            piece.en_passant = null;
+        }
         piece.move(this.chessboard, dst);
 
-        return [true, captured_piece];
+        return [true, captured_piece, castle, en_passant];
     }
 
     getPieceName(pos){
@@ -72,7 +113,7 @@ class ChessView{
     onPointerEnter;
     onPointerLeave;
     chessboard;
-    src;
+    src = null;
 
     constructor({model, black = false, onPointerDown, onPointerUp, onPointerEnter, onPointerLeave}){
         this.model = model;
@@ -92,6 +133,13 @@ class ChessView{
         }
 
         delete this.constructor;
+    }
+
+    remove(position){
+        let cell = document.getElementById(position);
+
+        cell.removeChild(cell.firstChild)
+            .appendChild(document.createElement("span"))
     }
 
     move(src, dst){
@@ -132,6 +180,8 @@ class ChessView{
 class Chess{
     model;
     view;
+    turn;
+
     constructor(){
         this.model = new ChessModel();
         this.view = new ChessView({
@@ -141,12 +191,31 @@ class Chess{
             onPointerEnter: this.onPointerEnter.bind(this),
             onPointerLeave: this.onPointerLeave.bind(this)
         });
+
+        this.turn = TEAM.WHITE;
+
         delete this.constructor;
+    }
+
+    onDraw(reason){
+        console.log("Draw by", reason);
+    }
+
+    onWin(turn){
+        let player = turn === TEAM.WHITE? "White" : "Black";
+
+        console.log(player, "wins")
+    }
+
+    isTheirTurn(pos){
+        if (this.model.chessboard[pos] === null) return false;
+        return this.turn === this.model.chessboard[pos].owner;
     }
 
     onPointerDown(e){
         let id = parseInt(e.target.id);
         if(!this.model.chessboard[id]) return;
+        if(!this.isTheirTurn(id)) return;
         this.view.src = id;
         this.view.chessboard.children.item(this.view.src).classList.add("grey");
         // segnala mosse valide
@@ -187,11 +256,40 @@ class Chess{
     move(src, dst){
         if(src == dst) return;
 
-        let [moved, captured_piece] = this.model.move(src, dst);
+        let [moved, captured_piece, castle, en_passant] = this.model.move(src, dst);
 
         if(captured_piece) this.view.capture(captured_piece);
         
-        if(moved) this.view.move(src, dst);
+        if(moved) {
+            this.view.move(src, dst);
+
+            if(en_passant){
+                this.model.chessboard[en_passant.current_position] = null;
+                this.view.remove(en_passant.current_position)
+            }
+            if(castle){
+                this.view.move(castle.rook.current_position, castle.castle)
+                castle.rook.move(this.model.chessboard, castle.castle);
+            }
+            
+            if(this.model.insufficientMaterial()){
+                this.onDraw("INSUFFICIENT MATERIAL");
+            }
+
+            // check checkmate
+            if(this.model.isCheckMate(this.turn)){
+                this.onWin(this.turn);
+                return;
+            }
+
+            // check stall
+            if(this.model.isStall(this.turn)){
+                this.onDraw("STALL");
+                return;
+            }
+
+            this.turn *= -1;
+        }
     }
 
     toString(){
