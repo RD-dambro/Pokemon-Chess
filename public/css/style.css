@@ -7,6 +7,10 @@
     aspect-ratio: 1/1;
 }
 
+#promotion-popup {
+
+}
+
 .rotate {
     -webkit-transform: rotateX(180deg);
     transform: rotateX(180deg);
@@ -52,6 +56,10 @@
               user-select: none; /* hrome, Edge, Opera and Firefox */
 }
 
-span{
+.nopointer{
     pointer-events: none;
+}
+
+.hidden {
+    display: none;
 }

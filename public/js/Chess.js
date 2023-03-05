@@ -5,6 +5,12 @@ const TEAM = Object.freeze({ WHITE: 1, BLACK: -1})
 class ChessModel{
     chessboard;
 
+    moved
+    captured_piece
+    castle
+    en_passant
+    promoted
+
     constructor(){
         this.chessboard = new Array(64).fill(null);
 
@@ -58,36 +64,47 @@ class ChessModel{
         return `${COL_INDEXES[col]}${ROW_INDEXES[row]}`;
     }
 
+    isPromotion(piece, dst){
+        return piece && piece.toString() === "Pawn" && (ChessModel.getRow(dst) === 0 || ChessModel.getRow(dst) === 7)
+    }
+
     move(src, dst){
         let piece = this.chessboard[src];
         
-        if(!piece) return [false, null];
+        if(!(piece && piece.getValidMoves(this.chessboard).includes(dst))) {
+            this.moved = false;
+            this.captured_piece = null;
 
-        if(!piece.getValidMoves(this.chessboard).includes(dst)) return [false, null];
+            return;
+        }
 
-        let captured_piece = this.chessboard[dst]
-        let castle = null;
+        this.captured_piece = this.chessboard[dst]
 
         if(piece.castle_moves){
             for(let move of piece.castle_moves){
                 if(move.move === dst){
-                    castle = move;
+                    this.castle = move;
                 }
             }
         }
 
-        let en_passant = null;
         if(piece.en_passant){
             let en_passant_move = piece.en_passant.current_position + piece.owner*MOVES[DIRECTIONS.UP]
             if(en_passant_move === dst){
-                en_passant = piece.en_passant;
-                captured_piece = en_passant;
+                this.en_passant = piece.en_passant;
+                this.captured_piece = this.en_passant;
             }
             piece.en_passant = null;
         }
+
+        if(this.isPromotion(piece, dst))
+        {
+            this.promoted = piece;
+        }
+
         piece.move(this.chessboard, dst);
 
-        return [true, captured_piece, castle, en_passant];
+        this.moved = true;
     }
 
     getPieceName(pos){
@@ -112,34 +129,63 @@ class ChessView{
     onPointerUp;
     onPointerEnter;
     onPointerLeave;
+    onPromotionPicked
     chessboard;
+    promotion_popup;
+
     src = null;
 
-    constructor({model, black = false, onPointerDown, onPointerUp, onPointerEnter, onPointerLeave}){
+    constructor({model, black = false, onPointerDown, onPointerUp, onPointerEnter, onPointerLeave, onPromotionPicked}){
         this.model = model;
         this.black = black;
         this.onPointerDown = onPointerDown;
         this.onPointerUp = onPointerUp;
         this.onPointerEnter = onPointerEnter;
         this.onPointerLeave = onPointerLeave;
+        this.onPromotionPicked = onPromotionPicked
 
         this.chessboard = document.getElementById("chessboard");
+        this.promotion_popup = document.getElementById("promotion-popup");
+
+        for(let c of this.promotion_popup.getElementsByClassName("option"))
+            c.addEventListener("click", this.onPromotionPicked)
         
         if(!this.black)
             this.chessboard.classList.add("rotate");
 
         for(let pos = 0; pos <= 63; pos++){
-            this.initCell(pos);
+            let cell = this.initCell(pos);
+            this.chessboard.appendChild(cell);
         }
 
         delete this.constructor;
+    }
+
+    displayPromotionPopup(position){
+        this.promotion = position;
+        this.promotion_popup.classList.remove("hidden");
+    }
+
+    hidePromotionPopup(){
+        this.promotion_popup.classList.add("hidden");
+
+        this.chessboard.childNodes.item(this.promotion)
+            .replaceWith(this.initCell(this.promotion))
+
+        this.promotion = null;
+    }
+
+    createEmptySpan(){
+        let span = document.createElement("span");
+        span.classList.add("nopointer")
+        return span
     }
 
     remove(position){
         let cell = document.getElementById(position);
 
         cell.removeChild(cell.firstChild)
-            .appendChild(document.createElement("span"))
+        cell.appendChild(this.createEmptySpan());
     }
 
     move(src, dst){
@@ -148,7 +194,7 @@ class ChessView{
 
         dst_cell.removeChild(dst_cell.firstChild);
         dst_cell.appendChild(src_cell.firstChild);
-        src_cell.appendChild(document.createElement("span"));
+        src_cell.appendChild(this.createEmptySpan());
     }
 
     capture(){}
@@ -157,7 +203,7 @@ class ChessView{
         let cell = document.createElement("div");
         cell.id = pos;
 
-        cell.appendChild(document.createElement("span"));
+        cell.appendChild(this.createEmptySpan());
         cell.firstChild.innerText = this.model.getPieceName(pos);
 
         let even_col = ChessModel.getCol(pos) % 2 == 0;
@@ -172,7 +218,7 @@ class ChessView{
         cell.addEventListener("pointerenter", this.onPointerEnter);
         cell.addEventListener("pointerleave", this.onPointerLeave);
 
-        this.chessboard.appendChild(cell);
+        return cell;
     }
 }
 
@@ -189,7 +235,8 @@ class Chess{
             onPointerDown: this.onPointerDown.bind(this),
             onPointerUp: this.onPointerUp.bind(this),
             onPointerEnter: this.onPointerEnter.bind(this),
-            onPointerLeave: this.onPointerLeave.bind(this)
+            onPointerLeave: this.onPointerLeave.bind(this),
+            onPromotionPicked: this.onPromotionPicked.bind(this)
         });
 
         this.turn = TEAM.WHITE;
@@ -210,6 +257,13 @@ class Chess{
     isTheirTurn(pos){
         if (this.model.chessboard[pos] === null) return false;
         return this.turn === this.model.chessboard[pos].owner;
+    }
+
+    onPromotionPicked(e){
+        console.log(e.target.id);
+        this.model.chessboard[this.view.promotion] = new PIECES[e.target.id](-this.turn, this.view.promotion);
+
+        this.view.hidePromotionPopup();
     }
 
     onPointerDown(e){
@@ -256,39 +310,58 @@ class Chess{
     move(src, dst){
         if(src == dst) return;
 
-        let [moved, captured_piece, castle, en_passant] = this.model.move(src, dst);
+        this.model.move(src, dst);
 
-        if(captured_piece) this.view.capture(captured_piece);
+        if(this.model.captured_piece) {
+            this.view.capture(this.model.captured_piece);
+            this.model.captured_piece = null;
+        }
         
-        if(moved) {
+        if(this.model.moved) {
+            this.model.moved = false;
             this.view.move(src, dst);
 
-            if(en_passant){
-                this.model.chessboard[en_passant.current_position] = null;
-                this.view.remove(en_passant.current_position)
+            if(this.model.promoted){
+                this.view.displayPromotionPopup(this.model.promoted.current_position);
+                this.model.promoted = null;
             }
-            if(castle){
-                this.view.move(castle.rook.current_position, castle.castle)
-                castle.rook.move(this.model.chessboard, castle.castle);
+
+            if(this.model.en_passant){
+                this.model.chessboard[this.model.en_passant.current_position] = null;
+                this.view.remove(this.model.en_passant.current_position);
+
+                this.model.en_passant = null;
+            }
+            if(this.model.castle){
+                this.view.move(this.model.castle.rook.current_position, this.model.castle.castle)
+                this.model.castle.rook.move(this.model.chessboard, this.model.castle.castle);
+
+                this.model.castle = null;
             }
             
-            if(this.model.insufficientMaterial()){
-                this.onDraw("INSUFFICIENT MATERIAL");
-            }
-
-            // check checkmate
-            if(this.model.isCheckMate(this.turn)){
-                this.onWin(this.turn);
+            if(this.endCondition()){
                 return;
             }
-
-            // check stall
-            if(this.model.isStall(this.turn)){
-                this.onDraw("STALL");
-                return;
-            }
-
             this.turn *= -1;
+        }
+    }
+
+    endCondition(){
+        // check checkmate
+        if(this.model.isCheckMate(this.turn)){
+            this.onWin(this.turn);
+            return;
+        }
+
+        // check stall
+        if(this.model.isStall(this.turn)){
+            this.onDraw("STALL");
+            return;
+        }
+
+        if(this.model.insufficientMaterial()){
+            this.onDraw("INSUFFICIENT MATERIAL");
+            return;
         }
     }
 

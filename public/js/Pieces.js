@@ -153,12 +153,6 @@ class Piece{
         this.current_position = target_position;
 
         board[target_position] = this; 
-
-        // for(let p of board){
-        //     if(p && p.en_passant){
-        //         p.en_passant = null;
-        //     }
-        // }
     }
 
     toString(){
@@ -490,13 +484,13 @@ class Pawn extends Piece{
 
             // check left
             let left = board[target + MOVES[DIRECTIONS.LEFT]];
-            if( left !== null && left.toString() === "Pawn"){
+            if( left !== null && left.toString() === "Pawn" && left.owner != this.owner){
                 left.en_passant = this;
             }
             
             // check right
             let right = board[target + MOVES[DIRECTIONS.RIGHT]];
-            if( right !== null && right.toString() === "Pawn"){
+            if( right !== null && right.toString() === "Pawn" && right.owner != this.owner){
                 right.en_passant = this;
             }
         }
